@@ -7,6 +7,7 @@ export default function tweets(state = {}, action) {
         ...state,
         ...action.tweets,
       };
+
     case TOGGLE_TWEET:
       return {
         ...state,
