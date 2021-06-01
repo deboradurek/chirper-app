@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleAddTweet } from '../actions/tweets';
 
 class NewTweet extends Component {
   state = {
@@ -17,10 +19,9 @@ class NewTweet extends Component {
     e.preventDefault();
 
     const { text } = this.state;
+    const { dispatch, id } = this.props;
 
-    // todo: Add Tweet to Store
-
-    console.log('New Tweet: ', text);
+    dispatch(handleAddTweet(text, id));
 
     this.setState({
       text: '',
@@ -30,7 +31,7 @@ class NewTweet extends Component {
   render() {
     const { text } = this.state;
 
-    // Redirect to / if submited
+    // todo: Redirect to / if submitted
 
     const tweetLeft = 280 - text.length;
 
@@ -45,9 +46,10 @@ class NewTweet extends Component {
             className="textarea"
             maxLength={280}
           ></textarea>
+
           {tweetLeft <= 100 && <div className="tweet-length">{tweetLeft}</div>}
 
-          <button className="btn" disabled={text === ''}>
+          <button className="btn" type="submit" disabled={text === ''}>
             Submit
           </button>
         </form>
@@ -56,4 +58,4 @@ class NewTweet extends Component {
   }
 }
 
-export default NewTweet;
+export default connect()(NewTweet);
