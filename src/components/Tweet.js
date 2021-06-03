@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { formatTweet, formatDate } from '../utils/helpers';
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
 import { handleToggleTweet } from '../actions/tweets';
@@ -22,7 +22,8 @@ class Tweet extends Component {
 
   toParent = (e, id) => {
     e.preventDefault();
-    // todo: redirect to parent tweet
+
+    this.props.history.push(`/tweet/${id}`);
   };
 
   render() {
@@ -78,4 +79,4 @@ function mapStateToProps({ authedUser, users, tweets }, { id }) {
   };
 }
 
-export default connect(mapStateToProps)(Tweet);
+export default withRouter(connect(mapStateToProps)(Tweet));
