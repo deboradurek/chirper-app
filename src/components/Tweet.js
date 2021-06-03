@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { formatTweet, formatDate } from '../utils/helpers';
 import { TiArrowBackOutline, TiHeartOutline, TiHeartFullOutline } from 'react-icons/ti';
 import { handleToggleTweet } from '../actions/tweets';
@@ -31,10 +32,10 @@ class Tweet extends Component {
       return <p>This Tweet doesn't exist!</p>;
     }
 
-    const { avatar, name, timestamp, text, likes, hasLiked, replies, parent } = tweet;
+    const { avatar, name, timestamp, text, likes, hasLiked, replies, id, parent } = tweet;
 
     return (
-      <div className="tweet">
+      <Link to={`/tweet/${id}`} className="tweet">
         <div>
           <img src={avatar} alt={`Avatar of ${name}`} className="avatar"></img>
         </div>
@@ -62,7 +63,7 @@ class Tweet extends Component {
             <span>{likes !== 0 && likes}</span>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
